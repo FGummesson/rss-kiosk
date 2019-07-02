@@ -1,5 +1,3 @@
-
-
 function fetchLunchmenu() {
     console.log("fetching lunchmenu");
     fetch('/lunchmenu')
@@ -7,13 +5,18 @@ function fetchLunchmenu() {
         .then(data => {
             console.log(data.title);
             $('#title').empty().text(data.title);
-            $('#content').empty().html(data.content);
+            $('#content').empty().append(modifyContent(data.content));
             $('#pubDate').empty().html(new Date(data.pubDate).toLocaleString());
         })
         .catch(error => {
             $('#content').empty().html(error.error);
         })
 }
+
+function modifyContent(content) {
+    return content;
+}
+
 
 fetchLunchmenu();
 setInterval(fetchLunchmenu, 300000);
